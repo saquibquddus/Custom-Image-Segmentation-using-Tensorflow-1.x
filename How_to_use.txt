@@ -1,0 +1,15 @@
+1. TF-Records craetion for train and test data.
+Provide the path of train_image , train_image json, labelmap and output folder path in create_tf_records.py at line 236.
+Similarly for test images by commenting the  train images code.
+Run Python create_tf_records.py file for train and test dataset.
+
+
+2.Copy labelmap.pbtxt and model_name.config in mask_training folder and model in mask folder.
+In model_name.config,change the details as per requirements at line 10, 127, 133, 142, 144, 158, 160.
+
+3. #train cmd:
+python train.py --logtostderr --train_dir=mask_training/ --pipeline_config_path=mask_training/mask_rcnn_inception_v2_coco.config
+
+
+4. #inference cmd
+python export_inference_graph.py --input_type image_tensor --pipeline_config_path mask_training/mask_rcnn_inception_v2_coco.config --trained_checkpoint_prefix mask_training/model.ckpt-10 --output_directory inference_graph
